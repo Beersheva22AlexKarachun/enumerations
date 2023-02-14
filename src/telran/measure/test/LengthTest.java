@@ -8,16 +8,17 @@ import org.junit.jupiter.api.Test;
 import telran.measure.*;
 
 class LengthTest {
-Length length1 = new Length(1, LengthUnit.KM);
-Length length2 = new Length(500, LengthUnit.M);
-Length l3 = new Length(50000, LengthUnit.CM);
+	Length length1 = new Length(1, LengthUnit.KM);
+	Length length2 = new Length(500, LengthUnit.M);
+	Length length3 = new Length(50000, LengthUnit.CM);
+
 	@BeforeEach
 	void setUp() throws Exception {
 	}
 
 	@Test
 	void testEqualsObject() {
-		assertEquals(length2, l3);
+		assertEquals(length2, length3);
 		assertNotEquals(length1, length2);
 	}
 
@@ -25,12 +26,12 @@ Length l3 = new Length(50000, LengthUnit.CM);
 	void testCompareTo() {
 		assertTrue(length2.compareTo(length1) < 0);
 		assertTrue(length1.compareTo(length2) > 0);
-		assertTrue(length2.compareTo(l3) == 0);
+		assertTrue(length2.compareTo(length3) == 0);
 	}
 
 	@Test
 	void testConvert() {
-		Length l = l3.convert(LengthUnit.M);
+		Length l = length3.convert(LengthUnit.M);
 		assertEquals(length2.getAmount(), l.getAmount());
 		assertEquals(length2.getUnit(), l.getUnit());
 	}
@@ -39,6 +40,7 @@ Length l3 = new Length(50000, LengthUnit.CM);
 	void testToString() {
 		assertEquals("500.0M", length2.toString());
 	}
+
 	@Test
 	void testBetween() {
 		Length l = LengthUnit.M.between(length2, length1);
